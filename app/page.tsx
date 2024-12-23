@@ -132,22 +132,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-8">
-      <main className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8">
-        <h1 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-          随机选择器
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 sm:p-8">
+      <main className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+          今天吃什么？看什么？玩什么？
         </h1>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
           {/* 左侧：输入区域 */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* 添加类别区域 */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <span className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-2">
+            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                <span className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
                   1
                 </span>
-                添加新类别
+                创建决策类别
               </h2>
               <div className="flex gap-2">
                 <input
@@ -155,27 +155,27 @@ export default function Home() {
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
                   className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="输入类别名称"
+                  placeholder="例如：午餐、电影、周末活动..."
                 />
                 <button
                   onClick={addCategory}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center gap-2"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
-                  添加
+                  创建
                 </button>
               </div>
             </div>
 
             {/* 添加选项区域 */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <span className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white mr-2">
+            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                <span className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
                   2
                 </span>
-                添加选项
+                添加选项内容
               </h2>
               <div className="space-y-3">
                 <select
@@ -183,7 +183,7 @@ export default function Home() {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
                 >
-                  <option value="">选择类别</option>
+                  <option value="">请先选择一个类别</option>
                   {categories.map(cat => (
                     <option key={cat.id} value={cat.id}>{cat.name}</option>
                   ))}
@@ -194,11 +194,15 @@ export default function Home() {
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
                     className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
-                    placeholder="输入选项"
+                    placeholder="添加具体选项..."
                   />
                   <button
                     onClick={addOption}
-                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-200 flex items-center gap-2"
+                    disabled={!selectedCategory}
+                    className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow
+                      ${!selectedCategory 
+                        ? 'bg-gray-300 cursor-not-allowed' 
+                        : 'bg-green-500 hover:bg-green-600 text-white'}`}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -211,103 +215,111 @@ export default function Home() {
           </div>
 
           {/* 右侧：显示区域 */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* 显示类别和选项 */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h2 className="text-xl font-semibold mb-4 flex items-center justify-between">
+            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center justify-between">
                 <div className="flex items-center">
-                  <span className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white mr-2">
+                  <span className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
                     3
                   </span>
-                  选择要随机的类别
+                  选择决策范围
                 </div>
                 <span className="text-sm text-gray-500">
-                  点击类别卡片选择
+                  点击卡片选择/取消
                 </span>
               </h2>
-              <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
-                {categories.map(category => (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    key={category.id}
-                    onClick={() => toggleCategorySelection(category.id)}
-                    className={`group bg-white p-4 rounded-lg shadow-sm border-2 transition-all duration-200 cursor-pointer
-                      ${category.selected 
-                        ? 'border-purple-500 ring-2 ring-purple-200' 
-                        : 'border-gray-100 hover:border-purple-200'}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-semibold text-purple-600 flex items-center gap-2">
-                        {category.name}
-                        {category.selected && (
-                          <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
-                      </h3>
-                      <button
-                        onClick={(e) => deleteCategory(category.id, e)}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-red-100 rounded-full"
-                      >
-                        <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {category.options.map((option, index) => (
-                        <span
-                          key={index}
-                          className="group/option px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm flex items-center gap-1"
-                        >
-                          {option}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              deleteOption(category.id, index);
-                            }}
-                            className="opacity-0 group-hover/option:opacity-100 hover:text-red-500 transition-opacity"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                {categories.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    还没有添加任何类别，从步骤1开始吧！
+                  </div>
+                ) : (
+                  categories.map(category => (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      key={category.id}
+                      onClick={() => toggleCategorySelection(category.id)}
+                      className={`group bg-white p-4 rounded-lg shadow-sm border-2 transition-all duration-200 cursor-pointer hover:shadow
+                        ${category.selected 
+                          ? 'border-purple-500 ring-2 ring-purple-200' 
+                          : 'border-gray-100 hover:border-purple-200'}`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-purple-600 flex items-center gap-2">
+                          {category.name}
+                          {category.selected && (
+                            <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
-                          </button>
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
+                          )}
+                        </h3>
+                        <button
+                          onClick={(e) => deleteCategory(category.id, e)}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-red-100 rounded-full"
+                        >
+                          <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {category.options.map((option, index) => (
+                          <span
+                            key={index}
+                            className="group/option px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm flex items-center gap-1"
+                          >
+                            {option}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteOption(category.id, index);
+                              }}
+                              className="opacity-0 group-hover/option:opacity-100 hover:text-red-500 transition-opacity"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))
+                )}
               </div>
             </div>
 
             {/* 随机选择区域 */}
-            <div className="bg-gray-50 p-6 rounded-xl text-center">
+            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
               <button
                 onClick={randomSelect}
                 disabled={!categories.some(cat => cat.selected)}
-                className={`w-full px-6 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg
+                className={`w-full px-6 py-4 rounded-xl transition-all duration-200 transform hover:scale-102 shadow-lg font-semibold text-lg
                   ${!categories.some(cat => cat.selected)
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600'
+                    ? 'bg-gray-300 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 hover:shadow-xl'
                   } text-white`}
               >
-                从选中类别中随机选择
+                {!categories.some(cat => cat.selected) 
+                  ? '请先选择决策范围'
+                  : '开始随机选择'}
               </button>
               {randomResult && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="mt-4 p-6 bg-white rounded-xl shadow-inner border-2 border-purple-200"
+                  className="mt-4 p-6 bg-white rounded-xl shadow-sm border border-purple-200"
                 >
                   <div className="space-y-2">
-                    <div className="text-sm text-gray-500">随机类别</div>
+                    <div className="text-sm text-gray-500">类别</div>
                     <p className="text-xl font-bold text-purple-600">
                       {randomResult.category}
                     </p>
                     <div className="h-px bg-gray-200 my-3"></div>
-                    <div className="text-sm text-gray-500">随机结果</div>
-                    <p className="text-2xl font-bold text-blue-600">
+                    <div className="text-sm text-gray-500">为你选择了</div>
+                    <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                       {randomResult.option}
                     </p>
                   </div>
