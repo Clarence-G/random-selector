@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 随机选择器 (Random Selector)
 
-## Getting Started
+一个帮助你做出选择的小工具。无论是今天吃什么、看什么电影，还是做什么周末活动，它都能帮你随机选择。基于 [Next.js](https://nextjs.org) 构建。
 
-First, run the development server:
+## 功能特点
+
+- 🎯 创建自定义类别和选项
+- 🎲 支持多类别随机选择
+- 💾 本地数据持久化存储
+- 📱 响应式设计，支持移动端
+- 🎨 现代化 UI 设计
+- ✨ 流畅的动画效果
+
+## 开始使用
+
+首先，运行开发服务器：
 
 ```bash
 npm run dev
-# or
+# 或
 yarn dev
-# or
+# 或
 pnpm dev
-# or
+# 或
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看结果。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 使用指南
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **创建决策类别**
+   - 在第一个输入框中输入类别名称（如：午餐、电影等）
+   - 点击"创建"按钮添加新类别
 
-## Learn More
+2. **添加选项内容**
+   - 从下拉菜单选择要添加选项的类别
+   - 在输入框中输入具体选项
+   - 点击"添加"按钮保存选项
 
-To learn more about Next.js, take a look at the following resources:
+3. **选择决策范围**
+   - 点击类别卡片选择/取消要参与随机的类别
+   - 可以同时选择多个类别
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **开始随机**
+   - 点击"开始随机选择"按钮
+   - 系统会从选中的类别中随机选择一个结果
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 技术栈
 
-## Deploy on Vercel
+- [Next.js](https://nextjs.org/) - React 框架
+- [TypeScript](https://www.typescriptlang.org/) - 类型安全
+- [Tailwind CSS](https://tailwindcss.com/) - 样式框架
+- [Framer Motion](https://www.framer.com/motion/) - 动画效果
+- [Vercel](https://vercel.com/) - 部署平台
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+本项目使用 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) 自动优化和加载 [Geist](https://vercel.com/font) 字体。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 部署
+
+推荐使用 [Vercel 平台](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) 部署，这是 Next.js 的创建者提供的平台。
+
+### 自定义域名设置
+
+1. 在 Vercel 仪表板中选择您的项目
+2. 进入 "Settings" -> "Domains"
+3. 添加您的域名
+4. 按照提示配置 DNS 记录
+
+## 了解更多
+
+要了解更多关于 Next.js 的信息，请查看以下资源：
+
+- [Next.js 文档](https://nextjs.org/docs) - 了解 Next.js 特性和 API
+- [Learn Next.js](https://nextjs.org/learn) - 交互式 Next.js 教程
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 许可证
+
+MIT License
