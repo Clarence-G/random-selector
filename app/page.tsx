@@ -132,19 +132,19 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 sm:p-8">
-      <main className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-2 sm:p-4 md:p-8">
+      <main className="max-w-4xl mx-auto bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
           今天吃什么？看什么？玩什么？
         </h1>
         
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {/* 左侧：输入区域 */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8">
             {/* 添加类别区域 */}
-            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
-              <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                <span className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
+            <div className="bg-gray-50 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-gray-100">
+              <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-4 flex items-center">
+                <span className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm text-sm sm:text-base">
                   1
                 </span>
                 创建决策类别
@@ -154,14 +154,14 @@ export default function Home() {
                   type="text"
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="例如：午餐、电影、周末活动..."
+                  className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  placeholder="例如：午餐、电影..."
                 />
                 <button
                   onClick={addCategory}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center gap-1 sm:gap-2 shadow-sm hover:shadow text-sm sm:text-base"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
                   创建
@@ -170,7 +170,7 @@ export default function Home() {
             </div>
 
             {/* 添加选项区域 */}
-            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
+            <div className="bg-gray-50 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-gray-100">
               <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
                 <span className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
                   2
@@ -215,21 +215,21 @@ export default function Home() {
           </div>
 
           {/* 右侧：显示区域 */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8">
             {/* 显示类别和选项 */}
-            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
-              <h2 className="text-lg sm:text-xl font-semibold mb-4 flex items-center justify-between">
+            <div className="bg-gray-50 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-gray-100">
+              <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-4 flex items-center justify-between">
                 <div className="flex items-center">
-                  <span className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm">
+                  <span className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white mr-2 shadow-sm text-sm sm:text-base">
                     3
                   </span>
                   选择决策范围
                 </div>
-                <span className="text-sm text-gray-500">
+                <span className="text-xs sm:text-sm text-gray-500">
                   点击卡片选择/取消
                 </span>
               </h2>
-              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              <div className="space-y-2 sm:space-y-3 max-h-[250px] sm:max-h-[300px] overflow-y-auto pr-2">
                 {categories.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">
                     还没有添加任何类别，从步骤1开始吧！
@@ -241,13 +241,13 @@ export default function Home() {
                       animate={{ opacity: 1, y: 0 }}
                       key={category.id}
                       onClick={() => toggleCategorySelection(category.id)}
-                      className={`group bg-white p-4 rounded-lg shadow-sm border-2 transition-all duration-200 cursor-pointer hover:shadow
+                      className={`group bg-white p-3 sm:p-4 rounded-lg shadow-sm border-2 transition-all duration-200 cursor-pointer hover:shadow
                         ${category.selected 
                           ? 'border-purple-500 ring-2 ring-purple-200' 
                           : 'border-gray-100 hover:border-purple-200'}`}
                     >
                       <div className="flex items-center justify-between">
-                        <h3 className="font-semibold text-purple-600 flex items-center gap-2">
+                        <h3 className="font-semibold text-purple-600 text-sm sm:text-base flex items-center gap-2">
                           {category.name}
                           {category.selected && (
                             <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,11 +264,11 @@ export default function Home() {
                           </svg>
                         </button>
                       </div>
-                      <div className="mt-2 flex flex-wrap gap-2">
+                      <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
                         {category.options.map((option, index) => (
                           <span
                             key={index}
-                            className="group/option px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm flex items-center gap-1"
+                            className="group/option px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm flex items-center gap-1"
                           >
                             {option}
                             <button
@@ -292,11 +292,11 @@ export default function Home() {
             </div>
 
             {/* 随机选择区域 */}
-            <div className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-100">
+            <div className="bg-gray-50 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-gray-100">
               <button
                 onClick={randomSelect}
                 disabled={!categories.some(cat => cat.selected)}
-                className={`w-full px-6 py-4 rounded-xl transition-all duration-200 transform hover:scale-102 shadow-lg font-semibold text-lg
+                className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl transition-all duration-200 transform hover:scale-102 shadow-lg font-semibold text-base sm:text-lg
                   ${!categories.some(cat => cat.selected)
                     ? 'bg-gray-300 cursor-not-allowed' 
                     : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 hover:shadow-xl'
@@ -310,16 +310,16 @@ export default function Home() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="mt-4 p-6 bg-white rounded-xl shadow-sm border border-purple-200"
+                  className="mt-3 sm:mt-4 p-4 sm:p-6 bg-white rounded-lg sm:rounded-xl shadow-sm border border-purple-200"
                 >
                   <div className="space-y-2">
-                    <div className="text-sm text-gray-500">类别</div>
-                    <p className="text-xl font-bold text-purple-600">
+                    <div className="text-xs sm:text-sm text-gray-500">类别</div>
+                    <p className="text-lg sm:text-xl font-bold text-purple-600">
                       {randomResult.category}
                     </p>
-                    <div className="h-px bg-gray-200 my-3"></div>
-                    <div className="text-sm text-gray-500">为你选择了</div>
-                    <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <div className="h-px bg-gray-200 my-2 sm:my-3"></div>
+                    <div className="text-xs sm:text-sm text-gray-500">为你选择了</div>
+                    <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                       {randomResult.option}
                     </p>
                   </div>
