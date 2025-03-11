@@ -237,12 +237,21 @@ export default function Home() {
     setNewCategory("");
   };
 
-  // 修改添加选项函数
+  // 修改添加选项函数，允许向默认类别添加选项
   const addOption = () => {
     if (!selectedCategory || !newOption.trim()) return;
     const newCategories = categories.map(cat => {
       if (cat.id === selectedCategory) {
-        return { ...cat, options: [...cat.options, newOption] };
+        // 检查是否已存在相同选项，避免重复
+        if (cat.options.includes(newOption)) {
+          alert(`"${newOption}"已存在于该类别中`);
+          return cat;
+        }
+        return { 
+          ...cat, 
+          options: [...cat.options, newOption],
+          // 保持isDefault属性不变，允许向默认类别添加选项
+        };
       }
       return cat;
     });
@@ -263,9 +272,64 @@ export default function Home() {
     saveToLocalStorage(newCategories);
   };
 
+  // 修改清除所有默认类别的函数
+  const clearDefaultCategories = () => {
+    // 只保留非默认类别
+    const userCategories = categories.filter(cat => !cat.isDefault);
+    setCategories(userCategories);
+    saveToLocalStorage(userCategories);
+    
+    // 如果当前选中的类别是默认类别，则清除选择
+    if (selectedCategory && categories.find(cat => cat.id === selectedCategory)?.isDefault) {
+      setSelectedCategory(null);
+    }
+    
+    // 添加清除成功的反馈提示
+    const defaultCategoriesCount = categories.filter(cat => cat.isDefault).length;
+    if (defaultCategoriesCount > 0) {
+      const randomElement = document.getElementById('random-result-container');
+      if (randomElement) {
+        randomElement.scrollIntoView({ behavior: 'smooth' });
+        setRandomResult({
+          category: "清除成功",
+          option: `已清除 ${defaultCategoriesCount} 个默认类别`
+        });
+      }
+    }
+  };
+
+  // 添加全选所有类别的函数
+  const selectAllCategories = () => {
+    const newCategories = categories.map(cat => ({
+      ...cat,
+      selected: true
+    }));
+    setCategories(newCategories);
+    saveToLocalStorage(newCategories);
+  };
+
+  // 添加全不选所有类别的函数
+  const deselectAllCategories = () => {
+    const newCategories = categories.map(cat => ({
+      ...cat,
+      selected: false
+    }));
+    setCategories(newCategories);
+    saveToLocalStorage(newCategories);
+  };
+
   // 添加删除类别功能
   const deleteCategory = (categoryId: string, e: React.MouseEvent) => {
     e.stopPropagation(); // 防止触发选中事件
+    const categoryToDelete = categories.find(cat => cat.id === categoryId);
+    
+    // 如果是默认类别，询问用户是否确定删除
+    if (categoryToDelete?.isDefault) {
+      if (!confirm(`确定要删除默认类别"${categoryToDelete.name}"吗？`)) {
+        return;
+      }
+    }
+    
     const newCategories = categories.filter(cat => cat.id !== categoryId);
     setCategories(newCategories);
     saveToLocalStorage(newCategories);
@@ -313,41 +377,26 @@ export default function Home() {
     });
   };
 
-  // 添加清除所有默认数据的函数
-  const clearDefaultCategories = () => {
-    const newCategories = categories.filter(cat => !cat.isDefault);
-    setCategories(newCategories);
-    saveToLocalStorage(newCategories);
-    // 如果当前选中的类别是默认类别，则清除选择
-    if (selectedCategory && categories.find(cat => cat.id === selectedCategory)?.isDefault) {
-      setSelectedCategory(null);
-    }
-  };
-
-  // 添加全选所有类别的函数
-  const selectAllCategories = () => {
-    const newCategories = categories.map(cat => ({
-      ...cat,
-      selected: true
-    }));
-    setCategories(newCategories);
-    saveToLocalStorage(newCategories);
-  };
-
-  // 添加全不选所有类别的函数
-  const deselectAllCategories = () => {
-    const newCategories = categories.map(cat => ({
-      ...cat,
-      selected: false
-    }));
-    setCategories(newCategories);
-    saveToLocalStorage(newCategories);
-  };
-
-  // 添加导入默认类别的函数
+  // 修改导入默认类别的函数，确保不覆盖用户已有类别
   const importDefaultCategories = () => {
-    setCategories(DEFAULT_CATEGORIES);
-    saveToLocalStorage(DEFAULT_CATEGORIES);
+    // 获取用户自定义类别
+    const userCategories = categories.filter(cat => !cat.isDefault);
+    
+    // 获取已存在的默认类别ID
+    const existingDefaultIds = categories
+      .filter(cat => cat.isDefault)
+      .map(cat => cat.id);
+    
+    // 过滤出尚未导入的默认类别
+    const newDefaultCategories = DEFAULT_CATEGORIES.filter(
+      cat => !existingDefaultIds.includes(cat.id)
+    );
+    
+    // 合并用户类别和新的默认类别
+    const newCategories = [...userCategories, ...newDefaultCategories];
+    
+    setCategories(newCategories);
+    saveToLocalStorage(newCategories);
     
     // 添加导入成功的反馈提示
     const randomElement = document.getElementById('random-result-container');
@@ -355,7 +404,7 @@ export default function Home() {
       randomElement.scrollIntoView({ behavior: 'smooth' });
       setRandomResult({
         category: "导入成功",
-        option: `已成功导入 ${DEFAULT_CATEGORIES.length} 个默认类别`
+        option: `已成功导入 ${newDefaultCategories.length} 个默认类别`
       });
     }
   };
